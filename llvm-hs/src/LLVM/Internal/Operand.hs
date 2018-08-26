@@ -786,7 +786,7 @@ instance DecodeM DecodeAST A.DISubprogram (Ptr FFI.DISubprogram) where
     containingType <- decodeM =<< liftIO (FFI.getDISubprogramContainingType p)
     unit <- decodeM =<< liftIO (FFI.getDISubprogramUnit p)
     templateParams <- decodeM =<< liftIO (FFI.getDISubprogramTemplateParams p)
-    variables <- decodeM =<< liftIO (FFI.getDISubprogramVariables p)
+    retainedNodes <- decodeM =<< liftIO (FFI.getDISubprogramRetainedNodes p)
     thrownTypes <- decodeM =<< liftIO (FFI.getDISubprogramThrownTypes p)
     decl <- decodeM =<< liftIO (FFI.getDISubprogramDeclaration p)
     pure A.Subprogram
@@ -806,7 +806,7 @@ instance DecodeM DecodeAST A.DISubprogram (Ptr FFI.DISubprogram) where
       , A.unit = unit
       , A.templateParams = templateParams
       , A.declaration = decl
-      , A.variables = variables
+      , A.retainedNodes = retainedNodes
       , A.thrownTypes = thrownTypes
       , A.localToUnit = localToUnit
       , A.thisAdjustment = thisAdjustment
@@ -831,7 +831,7 @@ instance EncodeM EncodeAST A.DISubprogram (Ptr FFI.DISubprogram) where
     unit <- encodeM unit
     templateParams <- encodeM templateParams
     declaration <- encodeM declaration
-    variables <- encodeM variables
+    retainedNodes <- encodeM retainedNodes
     thrownTypes <- encodeM thrownTypes
     Context c <- gets encodeStateContext
     FFI.upCast <$> liftIO
@@ -842,7 +842,7 @@ instance EncodeM EncodeAST A.DISubprogram (Ptr FFI.DISubprogram) where
         containingType virtuality virtualityIndex
         thisAdjustment flags optimized
         unit templateParams declaration
-        variables thrownTypes)
+        retainedNodes thrownTypes)
 
 instance DecodeM DecodeAST A.DILocalScope (Ptr FFI.DILocalScope) where
   decodeM ls = do

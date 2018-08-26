@@ -297,7 +297,7 @@ data DISubprogram = Subprogram
   , unit :: Maybe (MDRef DICompileUnit)
   , templateParams :: [MDRef DITemplateParameter]
   , declaration :: Maybe (MDRef DISubprogram)
-  , variables :: [MDRef DILocalVariable]
+  , retainedNodes :: [MDRef DILocalVariable]
   , thrownTypes :: [MDRef DIType]
   } deriving (Eq, Ord, Read, Show, Typeable, Data, Generic)
 

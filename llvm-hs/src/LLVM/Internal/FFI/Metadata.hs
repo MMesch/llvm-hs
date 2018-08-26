@@ -138,7 +138,7 @@ foreign import ccall unsafe "LLVM_Hs_DIFileGetFilename" getFileFilename ::
 foreign import ccall unsafe "LLVM_Hs_DIFileGetDirectory" getFileDirectory ::
   Ptr DIFile -> IO (Ptr MDString)
 
-foreign import ccall unsafe "LLVM_Hs_DIFileGetChecksumValue" getFileChecksumValue ::
+foreign import ccall unsafe "LLVM_Hs_DIFileGetChecksum" getFileChecksumValue ::
   Ptr DIFile -> IO (Ptr MDString)
 
 foreign import ccall unsafe "LLVM_Hs_DIFileGetChecksumKind" getFileChecksumKind ::
@@ -347,7 +347,7 @@ foreign import ccall unsafe "LLVM_Hs_DISubprogram_GetUnit" getDISubprogramUnit :
 foreign import ccall unsafe "LLVM_Hs_DISubprogram_GetTemplateParams" getDISubprogramTemplateParams ::
   Ptr DISubprogram -> IO (TupleArray DITemplateParameter)
 
-foreign import ccall unsafe "LLVM_Hs_DISubprogram_GetVariables" getDISubprogramVariables ::
+foreign import ccall unsafe "LLVM_Hs_DISubprogram_GetRetainedNodes" getDISubprogramRetainedNodes ::
   Ptr DISubprogram -> IO (TupleArray DILocalVariable)
 
 foreign import ccall unsafe "LLVM_Hs_DISubprogram_GetThrownTypes" getDISubprogramThrownTypes ::
