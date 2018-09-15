@@ -85,10 +85,11 @@ instance Arbitrary Encoding where
       ]
 
 instance Arbitrary ChecksumInfo where
-  arbitrary = ChecksumInfo <$> arbitrary <*> arbitrarySbs
-
-instance Arbitrary ChecksumKind where
-  arbitrary = QC.elements [MD5, SHA1]
+  arbitrary =
+    oneof
+      [ ChecksumInfo MD5 . BSS.pack <$> QC.vector 32
+      , ChecksumInfo SHA1 . BSS.pack <$> QC.vector 40
+      ]
 
 instance Arbitrary BasicTypeTag where
   arbitrary = QC.elements [BaseType, UnspecifiedType]
